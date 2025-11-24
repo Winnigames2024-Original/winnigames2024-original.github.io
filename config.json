@@ -1,0 +1,15 @@
+{
+  "site_top_h1": "Winnigames2024 Site Original",
+  "site_top_about_line1": "Simple PHP-based Static Site generator",
+  "site_top_about_line2": "Supports Markdown and deployed to GitHub Pages by GitHub Actions",
+  "prod_hostname": "ssg-test.atasasmaz.com",
+  "email": "winnigames2024@gmail.com",
+  "full_title": "Winnigames2024 Site - a Simple PHP-based for GitHub Pages",
+  "appended_title": " - Ata's SSG",
+  "site_desc": "Welcome to Winnigames2024 Site. This is a simple PHP-based Static Site Generator that supports Markdown and deployed to GitHub Pages by GitHub Actions.",
+  "linkedin_url": "https://www.linkedin.com/in/atasasmaz",
+  "twitter_url": "https://twitter.com/AtaSasmaz",
+  "github_url": "https://github.com/Winnigames2024-Original/",
+  "location": "Novy Urengoy, Russia",
+  "default_opengraph_image": "assets/images/site-icon-big.jpg"
+}
