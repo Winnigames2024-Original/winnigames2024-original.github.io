@@ -1,5 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Winnigames2024 | Loggining...</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
 
-<html><head>
+
+  <div id="div-conteiner">
+    <input name="user_codeFromGitHUB" value="Confirm Login" id="user_codeFromGithub">
+  </div>
+  
+  <div id="div-conteiner">
+    <input type="button" name="confirm" value="Confirm Login" id="confirm">
+  </div>
+
+  <script>
+    $(document).ready(function(){
+   		$('#confirm').click(function(){
+        var code_usr = $('#user_codeFromGithub').Text
+       		$.get('./login.php', {
+       			user_code: code_usr
+       		},
+            onAjaxSuccess
+          );
+ 
+function onAjaxSuccess(data)
+{
+ 
+  alert(data);
+}  
+    }) 
+}); 
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <html><head>
                         <title>Winnigames2024 | Error to loggining !</title>
                         <link rel="stylesheet" href="https://link-short.github.io/AuthMind/auth/authorize.php/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
                         </head>
@@ -25,4 +67,8 @@ setTimeout(function() {
 
 
 
-</tbody></table></body></html>
+</tbody></table></body></html> -->
+
+
+
+
