@@ -3,4 +3,28 @@
     <title>Winnigames2024 Original Site</title>
     <a href="./auth/github?type=github"><img src="https://raw.githubusercontent.com/Winnigames2024-Original/winnigames2024-original.github.io/refs/heads/main/assets/github_logo.png" alt="Login with github" style="width:50px;height:50px;"></a>
   </oauth>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDulyZVT0CiQ-9xJqMZiu30V1S1zwRmK2k",
+    authDomain: "winnigames2024app.firebaseapp.com",
+    databaseURL: "https://winnigames2024app-default-rtdb.firebaseio.com",
+    projectId: "winnigames2024app",
+    storageBucket: "winnigames2024app.firebasestorage.app",
+    messagingSenderId: "496367700072",
+    appId: "1:496367700072:web:8fcfaa794a2051fc2613dd",
+    measurementId: "G-Y3TY7FZ1EK"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 </html>
