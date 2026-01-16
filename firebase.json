@@ -1,0 +1,8 @@
+{
+  "hosting": {
+    "site": "verify-winnigames2024app",
+
+    "public": "public",
+    ...
+  }
+}
