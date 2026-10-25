@@ -15,7 +15,7 @@
 
   /* ---------- настройки ---------- */
   var CFG = {
-    dropVolume: 0.0019,   // сколько уровня добавляет одна капля радиусом 5
+    dropVolume: 0.0045,   // сколько уровня добавляет одна капля радиусом 5 (больше = быстрее Game Over)
     penDripRate: 0.8,     // базовая частота капель с пера
     wallDrips: true,      // потёки по верхнему краю экрана
     tendrils: true,       // языки чернил, поднимающиеся из лужи
@@ -28,7 +28,8 @@
      1. СТИЛИ
      ============================================================ */
   var CSS = `
-  .ink-canvas{position:fixed;inset:0;z-index:9999;pointer-events:none}
+  /* canvas выше окна: перо видно поверх диалога, а чернила заливают и его тоже */
+  .ink-canvas{position:fixed;inset:0;z-index:10001;pointer-events:none}
   html.ink-cursor,html.ink-cursor *{cursor:none!important}
   html.ink-shake{animation:ink-shake .5s linear}
   @keyframes ink-shake{
@@ -92,7 +93,7 @@
   .ink-btn:focus-visible{outline:none}
 
   /* --- game over --- */
-  .ink-gameover{position:fixed;inset:0;z-index:10001;display:grid;place-items:center;background:#000;
+  .ink-gameover{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;background:#000;
     padding:0 max(16px,env(safe-area-inset-left,0px));text-align:center;font-family:"Alice",Georgia,serif}
   .ink-gameover[hidden]{display:none!important}
   .ink-go-inner{display:flex;flex-direction:column;align-items:center;gap:8px;
@@ -237,9 +238,11 @@
     return y;
   }
 
-  function addDrop(x, y, r, vx, vy) {
-    if (drops.length > 280) return;
-    drops.push({ x: x, y: y, r: r, vx: vx || 0, vy: vy || 0 });
+  /* splash = брызга: не копит уровень и не порождает новых брызг.
+     Без этого флага капли размножаются лавиной и экран заливает за секунды. */
+  function addDrop(x, y, r, vx, vy, splash) {
+    if (drops.length > 170) return;
+    drops.push({ x: x, y: y, r: r, vx: vx || 0, vy: vy || 0, splash: !!splash });
   }
 
   function splatter(x, y, n) {
@@ -259,13 +262,18 @@
   }
 
   function land(d) {
+    if (d.splash) {                       // брызга: только лёгкая рябь, и всё
+      ripples.push({ x: d.x, a: 1.4, w: 18, t: 0 });
+      if (ripples.length > 14) ripples.shift();
+      return;
+    }
     level = Math.min(1, level + CFG.dropVolume * Math.pow(d.r / 5, 2));
     ripples.push({ x: d.x, a: Math.min(9, 2 + d.r * 0.9), w: 26 + d.r * 5, t: 0 });
     if (ripples.length > 14) ripples.shift();
     for (var i = 0; i < (d.r > 3 ? 3 : 2); i++) {
       var a = -Math.PI / 2 + (Math.random() - 0.5) * 1.9;
       addDrop(d.x, d.y - 2, 0.9 + Math.random() * 1.5,
-        Math.cos(a) * (40 + Math.random() * 90), Math.sin(a) * (60 + Math.random() * 120));
+        Math.cos(a) * (40 + Math.random() * 90), Math.sin(a) * (60 + Math.random() * 120), true);
     }
     if (CFG.tendrils && Math.random() < 0.18 && tendrils.length < 7) {
       tendrils.push({ x: d.x, h: 0, max: 20 + Math.random() * 55, w: 7 + Math.random() * 9, t: 0, up: true });
